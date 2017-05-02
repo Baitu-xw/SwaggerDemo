@@ -15,7 +15,7 @@ namespace SwaggerDemo
     /// <summary>
     /// The route config.
     /// </summary>
-    public class RouteConfig
+    public static class RouteConfig
     {
         /// <summary>
         /// The register routes.

@@ -2,6 +2,9 @@
 // <copyright file="AutomapperConfig.cs" company="TractManager, Inc.">
 //   Copyright © 2017
 // </copyright>
+// <summary>
+//   The AutoMapper config.
+// </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace SwaggerDemo

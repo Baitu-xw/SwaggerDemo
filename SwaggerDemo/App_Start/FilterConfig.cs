@@ -14,7 +14,7 @@ namespace SwaggerDemo
     /// <summary>
     /// The filter config.
     /// </summary>
-    public class FilterConfig
+    public static class FilterConfig
     {
         /// <summary>
         /// The register global filters.

@@ -34,7 +34,7 @@ namespace SwaggerDemo.Models
         /// <summary>
         /// The number of points of interest.
         /// </summary>
-        public int NumberOfPointsOfInterest => PointsOfInterest.Count;
+        public int NumberOfPointsOfInterest => this.PointsOfInterest.Count;
 
         /// <summary>
         /// Gets or sets the points of interest.

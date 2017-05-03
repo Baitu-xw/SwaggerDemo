@@ -14,7 +14,7 @@ namespace SwaggerDemo.Models
     /// <summary>
     /// The point of interest for update DTO.
     /// </summary>
-    public abstract class PointOfInterestForUpdateDto
+    public class PointOfInterestForUpdateDto
     {
         /// <summary>
         /// Gets or sets the name.

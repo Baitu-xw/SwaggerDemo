@@ -64,14 +64,14 @@ namespace SwaggerDemo.Controllers
             {
                 if (!this.cityInfoRepository.CityExists(cityId))
                 {
-                    StatusCode(HttpStatusCode.NotFound);
+                    this.StatusCode(HttpStatusCode.NotFound);
                 }
 
-                return Ok(Mapper.Map<IEnumerable<PointOfInterestDto>>(this.cityInfoRepository.GetPointsOfInterestForCity(cityId)));
+                return this.Ok(Mapper.Map<IEnumerable<PointOfInterestDto>>(this.cityInfoRepository.GetPointsOfInterestForCity(cityId)));
             }
             catch (Exception e)
             {
-                return StatusCode(HttpStatusCode.InternalServerError);
+                return this.StatusCode(HttpStatusCode.InternalServerError);
             }
             
         }
@@ -95,12 +95,12 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetPointOfInterest(int cityId, int poiId)
         {
-            if (!this.cityInfoRepository.CityExists(cityId)) StatusCode(HttpStatusCode.NotFound);
+            if (!this.cityInfoRepository.CityExists(cityId)) this.StatusCode(HttpStatusCode.NotFound);
 
             var pointOfInterestFromDb = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
-            if (pointOfInterestFromDb == null) StatusCode(HttpStatusCode.NotFound);
+            if (pointOfInterestFromDb == null) this.StatusCode(HttpStatusCode.NotFound);
 
-            return Ok(Mapper.Map<PointOfInterestDto>(pointOfInterestFromDb));
+            return this.Ok(Mapper.Map<PointOfInterestDto>(pointOfInterestFromDb));
         }
 
         /// <summary>
@@ -124,23 +124,22 @@ namespace SwaggerDemo.Controllers
             int cityId,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
-            if (pointOfInterest == null) return BadRequest();
+            if (pointOfInterest == null) return this.BadRequest();
 
-            if (pointOfInterest.Description == pointOfInterest.Name)
-                ModelState.AddModelError("Description", "Description should not be equal to name");
+            if (pointOfInterest.Description == pointOfInterest.Name) this.ModelState.AddModelError("Description", "Description should not be equal to name");
 
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!this.ModelState.IsValid) return this.BadRequest(this.ModelState);
 
-            if (!this.cityInfoRepository.CityExists(cityId)) StatusCode(HttpStatusCode.NotFound);
+            if (!this.cityInfoRepository.CityExists(cityId)) this.StatusCode(HttpStatusCode.NotFound);
 
             var pointToCreate = Mapper.Map<PointOfInterest>(pointOfInterest);
             this.cityInfoRepository.AddPointOfInterestForCity(cityId, pointToCreate);
 
-            if (!this.cityInfoRepository.Save()) return StatusCode(HttpStatusCode.InternalServerError);
+            if (!this.cityInfoRepository.Save()) return this.StatusCode(HttpStatusCode.InternalServerError);
 
             var createdPointOfInterest = Mapper.Map<PointOfInterestDto>(pointToCreate);
 
-            return Created(Request.RequestUri + "/" + createdPointOfInterest.Id, createdPointOfInterest);
+            return this.Created(this.Request.RequestUri + "/" + createdPointOfInterest.Id, createdPointOfInterest);
         }
 
         /// <summary>
@@ -168,23 +167,22 @@ namespace SwaggerDemo.Controllers
             int id,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
-            if (pointOfInterest == null) return BadRequest();
+            if (pointOfInterest == null) return this.BadRequest();
 
-            if (pointOfInterest.Description == pointOfInterest.Name)
-                ModelState.AddModelError("Description", "Description should not be equal to name");
+            if (pointOfInterest.Description == pointOfInterest.Name) this.ModelState.AddModelError("Description", "Description should not be equal to name");
 
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+            if (!this.ModelState.IsValid) return this.BadRequest(this.ModelState);
 
-            if (!this.cityInfoRepository.CityExists(cityId)) StatusCode(HttpStatusCode.NotFound);
+            if (!this.cityInfoRepository.CityExists(cityId)) this.StatusCode(HttpStatusCode.NotFound);
 
             var pointToUpdate = this.cityInfoRepository.GetPointOfInterestForCity(cityId, id);
-            if (pointToUpdate == null) StatusCode(HttpStatusCode.NotFound);
+            if (pointToUpdate == null) this.StatusCode(HttpStatusCode.NotFound);
 
             Mapper.Map(pointOfInterest, pointToUpdate);
 
-            if (!this.cityInfoRepository.Save()) return StatusCode(HttpStatusCode.InternalServerError);
+            if (!this.cityInfoRepository.Save()) return this.StatusCode(HttpStatusCode.InternalServerError);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return this.StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -206,15 +204,15 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult DeletePointOfAction(int cityId, int poiId)
         {
-            if (!this.cityInfoRepository.CityExists(cityId)) return StatusCode(HttpStatusCode.NotFound);
+            if (!this.cityInfoRepository.CityExists(cityId)) return this.StatusCode(HttpStatusCode.NotFound);
 
             var pointEntity = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
-            if (pointEntity == null) return StatusCode(HttpStatusCode.NotFound);
+            if (pointEntity == null) return this.StatusCode(HttpStatusCode.NotFound);
 
             this.cityInfoRepository.DeletePointOfInterest(pointEntity);
-            if (!this.cityInfoRepository.Save()) return StatusCode(HttpStatusCode.InternalServerError);
+            if (!this.cityInfoRepository.Save()) return this.StatusCode(HttpStatusCode.InternalServerError);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return this.StatusCode(HttpStatusCode.NoContent);
         }
 
     }

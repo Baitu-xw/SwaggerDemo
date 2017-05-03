@@ -52,7 +52,7 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(HttpError))]
         public IHttpActionResult GetCities()
         {
-            return Ok(Mapper.Map<IEnumerable<CityDto>>(this.cityInfoRepository.GetCities()));
+            return this.Ok(Mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(this.cityInfoRepository.GetCities()));
         }
 
         /// <summary>
@@ -76,11 +76,14 @@ namespace SwaggerDemo.Controllers
             var city = this.cityInfoRepository.GetCity(cityId, includePointsOfInterest);
             if (city == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
             if (includePointsOfInterest)
-                return Ok(Mapper.Map<CityDto>(city));
+            {
+                return this.Ok(Mapper.Map<CityDto>(city));
+            }
+
             return this.Ok(Mapper.Map<CityWithoutPointsOfInterestDto>(city));
         }
     }

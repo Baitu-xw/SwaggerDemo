@@ -12,7 +12,7 @@ namespace SwaggerDemo.Models
     /// <summary>
     /// The city without points of interest DTO.
     /// </summary>
-    public abstract class CityWithoutPointsOfInterestDto
+    public class CityWithoutPointsOfInterestDto
     {
         /// <summary>
         /// Gets or sets the id.

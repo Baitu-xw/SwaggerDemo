@@ -28,9 +28,9 @@ namespace SwaggerDemo
         public static void RegisterTypes(IUnityContainer container)
         {
             // Win App Driver
-            container.RegisterType<ICityInfoRepository, CityInfoRepository>(
+            container.RegisterType<ICityInfoRepository, CityInfoFakeRepository>(
                 new ContainerControlledLifetimeManager(),
-                new InjectionFactory(_ => new CityInfoRepository(new CityInfoContext())));
+                new InjectionFactory(_ => new CityInfoFakeRepository()));
         }
     }
 }

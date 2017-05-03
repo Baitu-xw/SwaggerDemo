@@ -42,6 +42,5 @@ namespace SwaggerDemo.Entities
         /// Gets or sets the points of interest.
         /// </summary>
         public ICollection<PointOfInterest> PointsOfInterest { get; set; } = new List<PointOfInterest>();
-
     }
 }

@@ -1,6 +1,14 @@
-﻿namespace SwaggerDemo
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Global.asax.cs" company="TractManager, Inc.">
+//   Copyright © 2017
+// </copyright>
+// <summary>
+//   Defines the WebApiApplication type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace SwaggerDemo
 {
-    using System.Data.Entity;
     using System.Web;
     using System.Web.Http;
     using System.Web.Mvc;
@@ -8,12 +16,17 @@
 
     using SwaggerDemo.Services;
 
+    /// <summary>
+    /// The web API application.
+    /// </summary>
     public class WebApiApplication : HttpApplication
     {
+        /// <summary>
+        /// The application_ start.
+        /// </summary>
         protected void Application_Start()
         {
             SwaggerConfig.Register();
-            Database.SetInitializer(new DatabaseInitializer());
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

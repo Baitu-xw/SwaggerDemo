@@ -45,10 +45,14 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// Get all points of interest for city with specified id
+        /// The get points of interest.
         /// </summary>
-        /// <param name="cityId">Id of city to show points of interest</param>
-        /// <returns></returns>
+        /// <param name="cityId">
+        /// The city id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpGet]
         [Route("cities/{cityId}/pointsofinterest")]
         [SwaggerResponse(200, "Ok", typeof(IEnumerable<PointOfInterestDto>))]
@@ -73,11 +77,17 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// Get point of interest by poiId corresponding to city with specified id
+        /// The get point of interest.
         /// </summary>
-        /// <param name="cityId">Id of city</param>
-        /// <param name="poiId">Id of point of interest</param>
-        /// <returns></returns>
+        /// <param name="cityId">
+        /// The city id.
+        /// </param>
+        /// <param name="poiId">
+        /// The poi id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpGet]
         [Route("cities/{cityId}/pointsofinterest/{poiId}", Name = "GetPointOfInterest")]
         [SwaggerResponse(200, "Ok", typeof(PointOfInterestDto))]
@@ -94,17 +104,24 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// Create point of interest for city with specified id
+        /// The create point of interest.
         /// </summary>
-        /// <param name="cityId">Id of city</param>
-        /// <param name="pointOfInterest">Point of interest to create</param>
-        /// <returns></returns>
+        /// <param name="cityId">
+        /// The city id.
+        /// </param>
+        /// <param name="pointOfInterest">
+        /// The point of interest.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpPost]
         [Route("cities/{cityId}/pointsofinterest")]
         [SwaggerResponse(200, "Ok", typeof(PointOfInterestDto))]
         [SwaggerResponse(404, "Not found", typeof(NotFoundResult))]
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
-        public IHttpActionResult CreatePointOfInterest(int cityId,
+        public IHttpActionResult CreatePointOfInterest(
+            int cityId,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
             if (pointOfInterest == null) return BadRequest();
@@ -127,18 +144,28 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// Update existing point of interest for city with specified id
+        /// The update point of interest.
         /// </summary>
-        /// <param name="cityId">Id of city</param>
-        /// <param name="id">Id of point of interest to update</param>
-        /// <param name="pointOfInterest">Point of interest to create</param>
-        /// <returns></returns>
+        /// <param name="cityId">
+        /// The city id.
+        /// </param>
+        /// <param name="id">
+        /// The id.
+        /// </param>
+        /// <param name="pointOfInterest">
+        /// The point of interest.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpPut]
         [Route("cities/{cityId}/pointsofinterest/{poiId}")]
         [SwaggerResponse(204, "No content", typeof(StatusCodeResult))]
         [SwaggerResponse(404, "Not found", typeof(NotFoundResult))]
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
-        public IHttpActionResult UpdatePointOfInterest(int cityId, int id,
+        public IHttpActionResult UpdatePointOfInterest(
+            int cityId,
+            int id,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
             if (pointOfInterest == null) return BadRequest();
@@ -161,11 +188,17 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// Delete point of interest for city with specified id
+        /// The delete point of action.
         /// </summary>
-        /// <param name="cityId">Id of city</param>
-        /// <param name="poiId">Point of interest to update</param>
-        /// <returns></returns>
+        /// <param name="cityId">
+        /// The city id.
+        /// </param>
+        /// <param name="poiId">
+        /// The poi id.
+        /// </param>
+        /// <returns>
+        /// The <see cref="IHttpActionResult"/>.
+        /// </returns>
         [HttpDelete]
         [Route("cities/{cityId}/pointsofinterest/{poiId}")]
         [SwaggerResponse(204, "No content", typeof(StatusCodeResult))]

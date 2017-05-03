@@ -11,7 +11,6 @@ namespace SwaggerDemo
 {
     using Microsoft.Practices.Unity;
 
-    using SwaggerDemo.Entities;
     using SwaggerDemo.Services;
 
     /// <summary>

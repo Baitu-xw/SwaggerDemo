@@ -16,7 +16,6 @@ namespace SwaggerDemo.Services
     /// </summary>
     public sealed class IocContainer : UnityContainer
     {
-
         /// <summary>
         /// The sync root.
         /// </summary>

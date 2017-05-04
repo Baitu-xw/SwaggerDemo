@@ -45,10 +45,10 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The get points of interest.
+        /// Get all points of interest for specified city.
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -79,13 +79,13 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The get point of interest.
+        /// Get point of interest for specified city
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
         /// <param name="poiId">
-        /// The poi id.
+        /// Id of point of interest.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -112,13 +112,13 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The create point of interest.
+        /// Create point of interest for specified city
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
         /// <param name="pointOfInterest">
-        /// The point of interest.
+        /// Point of interest to create.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -166,16 +166,16 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The update point of interest.
+        /// Update point of interest for specified city.
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
-        /// <param name="id">
-        /// The id.
+        /// <param name="poiId">
+        /// Id of point of interest.
         /// </param>
         /// <param name="pointOfInterest">
-        /// The point of interest.
+        /// Resulting point of interest.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -187,7 +187,7 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult UpdatePointOfInterest(
             int cityId,
-            int id,
+            int poiId,
             [FromBody] PointOfInterestForCreationDto pointOfInterest)
         {
             if (pointOfInterest == null)
@@ -210,7 +210,7 @@ namespace SwaggerDemo.Controllers
                 this.StatusCode(HttpStatusCode.NotFound);
             }
 
-            var pointToUpdate = this.cityInfoRepository.GetPointOfInterestForCity(cityId, id);
+            var pointToUpdate = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointToUpdate == null)
             {
                 this.StatusCode(HttpStatusCode.NotFound);
@@ -227,13 +227,13 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The delete point of action.
+        /// Delete point of interest for specified city.
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
         /// <param name="poiId">
-        /// The poi id.
+        /// Id of point of interest.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -243,7 +243,7 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(204, "No content", typeof(StatusCodeResult))]
         [SwaggerResponse(404, "Not found", typeof(NotFoundResult))]
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
-        public IHttpActionResult DeletePointOfAction(int cityId, int poiId)
+        public IHttpActionResult DeletePointOfInterest(int cityId, int poiId)
         {
             if (!this.cityInfoRepository.CityExists(cityId))
             {

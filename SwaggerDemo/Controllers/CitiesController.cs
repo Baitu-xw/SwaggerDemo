@@ -11,6 +11,7 @@ namespace SwaggerDemo.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Http;
+    using System.Web.Http.Results;
 
     using AutoMapper;
 
@@ -41,7 +42,7 @@ namespace SwaggerDemo.Controllers
         }
 
         /// <summary>
-        /// The get cities.
+        /// Get cities without points of interest.
         /// </summary>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -49,20 +50,20 @@ namespace SwaggerDemo.Controllers
         [HttpGet]
         [Route("cities")]
         [SwaggerResponse(200, "Ok", typeof(IEnumerable<CityWithoutPointsOfInterestDto>))]
-        [SwaggerResponse(500, "Error occurred while processing your request", typeof(HttpError))]
+        [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetCities()
         {
             return this.Ok(Mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(this.cityInfoRepository.GetCities()));
         }
 
         /// <summary>
-        /// The get city.
+        /// Get city with or without point of interest.
         /// </summary>
         /// <param name="cityId">
-        /// The city id.
+        /// Id of city.
         /// </param>
         /// <param name="includePointsOfInterest">
-        /// The include points of interest.
+        /// Flag to include points of interest.
         /// </param>
         /// <returns>
         /// The <see cref="IHttpActionResult"/>.
@@ -70,7 +71,8 @@ namespace SwaggerDemo.Controllers
         [HttpGet]
         [Route("cities/{cityId}")]
         [SwaggerResponse(200, "Ok", typeof(CityDto))]
-        [SwaggerResponse(500, "Error occurred while processing your request", typeof(HttpError))]
+        [SwaggerResponse(404, "Not found", typeof(NotFoundResult))]
+        [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetCity(int cityId, bool includePointsOfInterest = false)
         {
             var city = this.cityInfoRepository.GetCity(cityId, includePointsOfInterest);

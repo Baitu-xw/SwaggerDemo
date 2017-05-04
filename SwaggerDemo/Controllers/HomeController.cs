@@ -12,7 +12,7 @@ namespace SwaggerDemo.Controllers
     using System.Web.Mvc;
 
     /// <summary>
-    /// The home controller.
+    /// Home controller to open swagger UI as default page.
     /// </summary>
     public class HomeController : Controller
     {

@@ -64,7 +64,7 @@ namespace SwaggerDemo.Controllers
             {
                 if (!this.cityInfoRepository.CityExists(cityId))
                 {
-                    this.StatusCode(HttpStatusCode.NotFound);
+                    return this.NotFound();
                 }
 
                 return
@@ -72,9 +72,9 @@ namespace SwaggerDemo.Controllers
                         Mapper.Map<IEnumerable<PointOfInterestDto>>(
                             this.cityInfoRepository.GetPointsOfInterestForCity(cityId)));
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return this.StatusCode(HttpStatusCode.InternalServerError);
+                return this.InternalServerError(e);
             }
         }
 
@@ -99,13 +99,13 @@ namespace SwaggerDemo.Controllers
         {
             if (!this.cityInfoRepository.CityExists(cityId))
             {
-                this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             var pointOfInterestFromDb = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointOfInterestFromDb == null)
             {
-                this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             return this.Ok(Mapper.Map<PointOfInterestDto>(pointOfInterestFromDb));
@@ -149,7 +149,7 @@ namespace SwaggerDemo.Controllers
 
             if (!this.cityInfoRepository.CityExists(cityId))
             {
-                this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             var pointToCreate = Mapper.Map<PointOfInterest>(pointOfInterest);
@@ -157,7 +157,7 @@ namespace SwaggerDemo.Controllers
 
             if (!this.cityInfoRepository.Save())
             {
-                return this.StatusCode(HttpStatusCode.InternalServerError);
+                return this.InternalServerError(new Exception("Failed to save changes into database"));
             }
 
             var createdPointOfInterest = Mapper.Map<PointOfInterestDto>(pointToCreate);
@@ -207,20 +207,20 @@ namespace SwaggerDemo.Controllers
 
             if (!this.cityInfoRepository.CityExists(cityId))
             {
-                this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             var pointToUpdate = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointToUpdate == null)
             {
-                this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             Mapper.Map(pointOfInterest, pointToUpdate);
 
             if (!this.cityInfoRepository.Save())
             {
-                return this.StatusCode(HttpStatusCode.InternalServerError);
+                return this.InternalServerError(new Exception("Failed to save changes into database"));
             }
 
             return this.StatusCode(HttpStatusCode.NoContent);
@@ -240,26 +240,26 @@ namespace SwaggerDemo.Controllers
         /// </returns>
         [HttpDelete]
         [Route("cities/{cityId}/pointsofinterest/{poiId}")]
-        [SwaggerResponse(204, "No content", typeof(StatusCodeResult))]
+        [SwaggerResponse(204, "No content", typeof(void))]
         [SwaggerResponse(404, "Not found", typeof(NotFoundResult))]
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult DeletePointOfInterest(int cityId, int poiId)
         {
             if (!this.cityInfoRepository.CityExists(cityId))
             {
-                return this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             var pointEntity = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointEntity == null)
             {
-                return this.StatusCode(HttpStatusCode.NotFound);
+                return this.NotFound();
             }
 
             this.cityInfoRepository.DeletePointOfInterest(pointEntity);
             if (!this.cityInfoRepository.Save())
             {
-                return this.StatusCode(HttpStatusCode.InternalServerError);
+                return this.InternalServerError(new Exception("Failed to save changes into database"));
             }
 
             return this.StatusCode(HttpStatusCode.NoContent);

@@ -1,18 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="City.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the City type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwaggerDemo.Entities
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     /// <summary>
     /// The city.
     /// </summary>

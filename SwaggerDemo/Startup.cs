@@ -1,22 +1,11 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="Startup.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the Startup type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-using Microsoft.Owin;
-
+﻿using Microsoft.Owin;
+using Owin;
 using SwaggerDemo;
 
 [assembly: OwinStartup(typeof(Startup))]
 
 namespace SwaggerDemo
 {
-    using Owin;
-
     /// <summary>
     /// The startup.
     /// </summary>

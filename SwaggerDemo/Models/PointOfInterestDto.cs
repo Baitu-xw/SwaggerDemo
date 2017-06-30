@@ -1,13 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PointOfInterestDto.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Point of interest
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
-namespace SwaggerDemo.Models
+﻿namespace SwaggerDemo.Models
 {
     /// <summary>
     /// Point of interest

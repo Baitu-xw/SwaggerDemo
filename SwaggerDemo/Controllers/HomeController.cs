@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HomeController.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   The home controller.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Web.Mvc;
 
 namespace SwaggerDemo.Controllers
 {
-    using System.Web.Mvc;
-
     /// <summary>
     /// Home controller to open swagger UI as default page.
     /// </summary>

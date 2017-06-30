@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="FilterConfig.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the FilterConfig type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Web.Mvc;
 
 namespace SwaggerDemo
 {
-    using System.Web.Mvc;
-
     /// <summary>
     /// The filter config.
     /// </summary>

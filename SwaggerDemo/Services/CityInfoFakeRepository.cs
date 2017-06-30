@@ -1,20 +1,10 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CityInfoFakeRepository.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the CityInfoFakeRepository type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using SwaggerDemo.Entities;
 
 namespace SwaggerDemo.Services
 {
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using SwaggerDemo.Entities;
-
     /// <summary>
     /// The city info fake repository.
     /// </summary>
@@ -30,7 +20,7 @@ namespace SwaggerDemo.Services
         /// </summary>
         public CityInfoFakeRepository()
         {
-            this.cities = new List<City>
+            cities = new List<City>
             {
                 new City
                 {
@@ -125,7 +115,7 @@ namespace SwaggerDemo.Services
         /// </returns>
         public bool CityExists(int cityId)
         {
-            return this.cities.Any(c => c.Id == cityId);
+            return cities.Any(c => c.Id == cityId);
         }
 
         /// <summary>
@@ -136,7 +126,7 @@ namespace SwaggerDemo.Services
         /// </returns>
         public IEnumerable<City> GetCities()
         {
-            return this.cities;
+            return cities;
         }
 
         /// <summary>
@@ -153,7 +143,7 @@ namespace SwaggerDemo.Services
         /// </returns>
         public City GetCity(int cityId, bool includePointsOfInterest)
         {
-            return this.cities.FirstOrDefault(c => c.Id == cityId);
+            return cities.FirstOrDefault(c => c.Id == cityId);
         }
 
         /// <summary>
@@ -167,7 +157,7 @@ namespace SwaggerDemo.Services
         /// </returns>
         public IEnumerable<PointOfInterest> GetPointsOfInterestForCity(int cityId)
         {
-            return this.cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest;
+            return cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest;
         }
 
         /// <summary>
@@ -185,7 +175,7 @@ namespace SwaggerDemo.Services
         public PointOfInterest GetPointOfInterestForCity(int cityId, int pointOfInterestId)
         {
             return
-                this.cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest.FirstOrDefault(p => p.Id == pointOfInterestId);
+                cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest.FirstOrDefault(p => p.Id == pointOfInterestId);
         }
 
         /// <summary>
@@ -199,7 +189,7 @@ namespace SwaggerDemo.Services
         /// </param>
         public void AddPointOfInterestForCity(int cityId, PointOfInterest pointOfInterest)
         {
-            this.cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest.Add(pointOfInterest);
+            cities.FirstOrDefault(c => c.Id == cityId)?.PointsOfInterest.Add(pointOfInterest);
         }
 
         /// <summary>
@@ -210,7 +200,7 @@ namespace SwaggerDemo.Services
         /// </param>
         public void DeletePointOfInterest(PointOfInterest pointOfInterest)
         {
-            foreach (var city in this.cities)
+            foreach (var city in cities)
             {
                 if (city.PointsOfInterest.Contains(pointOfInterest))
                 {

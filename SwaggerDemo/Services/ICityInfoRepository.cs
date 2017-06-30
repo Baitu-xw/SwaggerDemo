@@ -1,19 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ICityInfoRepository.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the ICityInfoRepository type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Collections;
+using System.Collections.Generic;
+using SwaggerDemo.Entities;
 
 namespace SwaggerDemo.Services
 {
-    using System.Collections;
-    using System.Collections.Generic;
-
-    using SwaggerDemo.Entities;
-
     /// <summary>
     /// The CityInfoRepository interface.
     /// </summary>

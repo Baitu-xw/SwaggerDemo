@@ -1,19 +1,9 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AutomapperConfig.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   The AutoMapper config.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using AutoMapper;
+using SwaggerDemo.Entities;
+using SwaggerDemo.Models;
 
 namespace SwaggerDemo
 {
-    using AutoMapper;
-
-    using SwaggerDemo.Entities;
-    using SwaggerDemo.Models;
-
     /// <summary>
     /// The AutoMapper config.
     /// </summary>

@@ -1,17 +1,8 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="RouteConfig.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   The route config.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace SwaggerDemo
 {
-    using System.Web.Mvc;
-    using System.Web.Routing;
-
     /// <summary>
     /// The route config.
     /// </summary>

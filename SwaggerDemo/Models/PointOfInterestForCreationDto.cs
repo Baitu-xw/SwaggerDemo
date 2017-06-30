@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PointOfInterestForCreationDto.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Point of interest for creation
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SwaggerDemo.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
     /// <summary>
     /// The point of interest for creation DTO.
     /// </summary>

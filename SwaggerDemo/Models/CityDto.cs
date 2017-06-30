@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CityDto.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   City object with points of interest
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Collections.Generic;
 
 namespace SwaggerDemo.Models
 {
-    using System.Collections.Generic;
-
     /// <summary>
     /// City object with points of interest
     /// </summary>
@@ -34,7 +25,7 @@ namespace SwaggerDemo.Models
         /// <summary>
         /// The number of points of interest.
         /// </summary>
-        public int NumberOfPointsOfInterest => this.PointsOfInterest.Count;
+        public int NumberOfPointsOfInterest => PointsOfInterest.Count;
 
         /// <summary>
         /// Gets or sets the points of interest.

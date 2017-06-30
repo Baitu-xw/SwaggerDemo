@@ -1,27 +1,14 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CitiesController.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Cities controller
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.Collections.Generic;
+using System.Web.Http;
+using System.Web.Http.Results;
+using AutoMapper;
+using Microsoft.Practices.Unity;
+using SwaggerDemo.Models;
+using SwaggerDemo.Services;
+using Swashbuckle.Swagger.Annotations;
 
 namespace SwaggerDemo.Controllers
 {
-    using System.Collections.Generic;
-    using System.Web.Http;
-    using System.Web.Http.Results;
-
-    using AutoMapper;
-
-    using Microsoft.Practices.Unity;
-
-    using SwaggerDemo.Models;
-    using SwaggerDemo.Services;
-
-    using Swashbuckle.Swagger.Annotations;
-
     /// <summary>
     /// Cities controller
     /// </summary>
@@ -38,7 +25,7 @@ namespace SwaggerDemo.Controllers
         /// </summary>
         public CitiesController()
         {
-            this.cityInfoRepository = IocContainer.Instance.Resolve<ICityInfoRepository>();
+            cityInfoRepository = IocContainer.Instance.Resolve<ICityInfoRepository>();
         }
 
         /// <summary>
@@ -53,7 +40,7 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetCities()
         {
-            return this.Ok(Mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(this.cityInfoRepository.GetCities()));
+            return Ok(Mapper.Map<IEnumerable<CityWithoutPointsOfInterestDto>>(cityInfoRepository.GetCities()));
         }
 
         /// <summary>
@@ -75,18 +62,18 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetCity(int cityId, bool includePointsOfInterest = false)
         {
-            var city = this.cityInfoRepository.GetCity(cityId, includePointsOfInterest);
+            var city = cityInfoRepository.GetCity(cityId, includePointsOfInterest);
             if (city == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
             if (includePointsOfInterest)
             {
-                return this.Ok(Mapper.Map<CityDto>(city));
+                return Ok(Mapper.Map<CityDto>(city));
             }
 
-            return this.Ok(Mapper.Map<CityWithoutPointsOfInterestDto>(city));
+            return Ok(Mapper.Map<CityWithoutPointsOfInterestDto>(city));
         }
     }
 }

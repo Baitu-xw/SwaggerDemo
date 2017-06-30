@@ -1,17 +1,8 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PointOfInterest.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the PointOfInterest type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SwaggerDemo.Entities
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
     /// <summary>
     /// The point of interest.
     /// </summary>

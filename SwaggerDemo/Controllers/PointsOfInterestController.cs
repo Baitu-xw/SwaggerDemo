@@ -1,30 +1,17 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PointsOfInterestController.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Points of interest controller
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Web.Http;
+using System.Web.Http.Results;
+using AutoMapper;
+using Microsoft.Practices.Unity;
+using SwaggerDemo.Entities;
+using SwaggerDemo.Models;
+using SwaggerDemo.Services;
+using Swashbuckle.Swagger.Annotations;
 
 namespace SwaggerDemo.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Net;
-    using System.Web.Http;
-    using System.Web.Http.Results;
-
-    using AutoMapper;
-
-    using Microsoft.Practices.Unity;
-
-    using SwaggerDemo.Entities;
-    using SwaggerDemo.Models;
-    using SwaggerDemo.Services;
-
-    using Swashbuckle.Swagger.Annotations;
-
     /// <summary>
     /// Points of interest controller
     /// </summary>
@@ -41,7 +28,7 @@ namespace SwaggerDemo.Controllers
         /// </summary>
         public PointsOfInterestController()
         {
-            this.cityInfoRepository = this.cityInfoRepository = IocContainer.Instance.Resolve<ICityInfoRepository>();
+            cityInfoRepository = cityInfoRepository = IocContainer.Instance.Resolve<ICityInfoRepository>();
         }
 
         /// <summary>
@@ -62,19 +49,19 @@ namespace SwaggerDemo.Controllers
         {
             try
             {
-                if (!this.cityInfoRepository.CityExists(cityId))
+                if (!cityInfoRepository.CityExists(cityId))
                 {
-                    return this.NotFound();
+                    return NotFound();
                 }
 
                 return
-                    this.Ok(
+                    Ok(
                         Mapper.Map<IEnumerable<PointOfInterestDto>>(
-                            this.cityInfoRepository.GetPointsOfInterestForCity(cityId)));
+                            cityInfoRepository.GetPointsOfInterestForCity(cityId)));
             }
             catch (Exception e)
             {
-                return this.InternalServerError(e);
+                return InternalServerError(e);
             }
         }
 
@@ -97,18 +84,18 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult GetPointOfInterest(int cityId, int poiId)
         {
-            if (!this.cityInfoRepository.CityExists(cityId))
+            if (!cityInfoRepository.CityExists(cityId))
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            var pointOfInterestFromDb = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
+            var pointOfInterestFromDb = cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointOfInterestFromDb == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            return this.Ok(Mapper.Map<PointOfInterestDto>(pointOfInterestFromDb));
+            return Ok(Mapper.Map<PointOfInterestDto>(pointOfInterestFromDb));
         }
 
         /// <summary>
@@ -134,35 +121,35 @@ namespace SwaggerDemo.Controllers
         {
             if (pointOfInterest == null)
             {
-                return this.BadRequest();
+                return BadRequest();
             }
 
             if (pointOfInterest.Description == pointOfInterest.Name)
             {
-                this.ModelState.AddModelError("Description", "Description should not be equal to name");
+                ModelState.AddModelError("Description", "Description should not be equal to name");
             }
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.BadRequest(this.ModelState);
+                return BadRequest(ModelState);
             }
 
-            if (!this.cityInfoRepository.CityExists(cityId))
+            if (!cityInfoRepository.CityExists(cityId))
             {
-                return this.NotFound();
+                return NotFound();
             }
 
             var pointToCreate = Mapper.Map<PointOfInterest>(pointOfInterest);
-            this.cityInfoRepository.AddPointOfInterestForCity(cityId, pointToCreate);
+            cityInfoRepository.AddPointOfInterestForCity(cityId, pointToCreate);
 
-            if (!this.cityInfoRepository.Save())
+            if (!cityInfoRepository.Save())
             {
-                return this.InternalServerError(new Exception("Failed to save changes into database"));
+                return InternalServerError(new Exception("Failed to save changes into database"));
             }
 
             var createdPointOfInterest = Mapper.Map<PointOfInterestDto>(pointToCreate);
 
-            return this.Created(this.Request.RequestUri + "/" + createdPointOfInterest.Id, createdPointOfInterest);
+            return Created(Request.RequestUri + "/" + createdPointOfInterest.Id, createdPointOfInterest);
         }
 
         /// <summary>
@@ -192,38 +179,38 @@ namespace SwaggerDemo.Controllers
         {
             if (pointOfInterest == null)
             {
-                return this.BadRequest();
+                return BadRequest();
             }
 
             if (pointOfInterest.Description == pointOfInterest.Name)
             {
-                this.ModelState.AddModelError("Description", "Description should not be equal to name");
+                ModelState.AddModelError("Description", "Description should not be equal to name");
             }
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.BadRequest(this.ModelState);
+                return BadRequest(ModelState);
             }
 
-            if (!this.cityInfoRepository.CityExists(cityId))
+            if (!cityInfoRepository.CityExists(cityId))
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            var pointToUpdate = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
+            var pointToUpdate = cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointToUpdate == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
             Mapper.Map(pointOfInterest, pointToUpdate);
 
-            if (!this.cityInfoRepository.Save())
+            if (!cityInfoRepository.Save())
             {
-                return this.InternalServerError(new Exception("Failed to save changes into database"));
+                return InternalServerError(new Exception("Failed to save changes into database"));
             }
 
-            return this.StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
         /// <summary>
@@ -245,24 +232,24 @@ namespace SwaggerDemo.Controllers
         [SwaggerResponse(500, "Error occurred while processing your request", typeof(InternalServerErrorResult))]
         public IHttpActionResult DeletePointOfInterest(int cityId, int poiId)
         {
-            if (!this.cityInfoRepository.CityExists(cityId))
+            if (!cityInfoRepository.CityExists(cityId))
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            var pointEntity = this.cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
+            var pointEntity = cityInfoRepository.GetPointOfInterestForCity(cityId, poiId);
             if (pointEntity == null)
             {
-                return this.NotFound();
+                return NotFound();
             }
 
-            this.cityInfoRepository.DeletePointOfInterest(pointEntity);
-            if (!this.cityInfoRepository.Save())
+            cityInfoRepository.DeletePointOfInterest(pointEntity);
+            if (!cityInfoRepository.Save())
             {
-                return this.InternalServerError(new Exception("Failed to save changes into database"));
+                return InternalServerError(new Exception("Failed to save changes into database"));
             }
 
-            return this.StatusCode(HttpStatusCode.NoContent);
+            return StatusCode(HttpStatusCode.NoContent);
         }
     }
 }

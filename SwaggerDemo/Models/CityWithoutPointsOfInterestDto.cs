@@ -1,12 +1,4 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CityWithoutPointsOfInterestDto.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   City without points of interest
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
-
 namespace SwaggerDemo.Models
 {
     /// <summary>

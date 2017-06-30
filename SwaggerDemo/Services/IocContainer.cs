@@ -1,16 +1,7 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IocContainer.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the IocContainer type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using Microsoft.Practices.Unity;
 
 namespace SwaggerDemo.Services
 {
-    using Microsoft.Practices.Unity;
-
     /// <summary>
     /// The IoC container.
     /// </summary>

@@ -1,16 +1,7 @@
-// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="WebApiConfig.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the WebApiConfig type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+using System.Web.Http;
 
 namespace SwaggerDemo
 {
-    using System.Web.Http;
-
     /// <summary>
     /// The web API config.
     /// </summary>

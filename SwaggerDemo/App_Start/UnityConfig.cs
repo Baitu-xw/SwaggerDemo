@@ -1,18 +1,8 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="UnityConfig.cs" company="TractManager, Inc.">
-//   Copyright © 2017
-// </copyright>
-// <summary>
-//   Defines the UnityConfig type.
-// </summary>
-// --------------------------------------------------------------------------------------------------------------------
+﻿using Microsoft.Practices.Unity;
+using SwaggerDemo.Services;
 
 namespace SwaggerDemo
 {
-    using Microsoft.Practices.Unity;
-
-    using SwaggerDemo.Services;
-
     /// <summary>
     /// The unity config.
     /// </summary>
